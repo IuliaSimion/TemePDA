@@ -1,0 +1,9 @@
+c:\users\iulia\documents\visual studio 2017\Projects\PrimeNumbers\PrimeNumbers\bin\Debug\PrimeNumbers.exe.config
+c:\users\iulia\documents\visual studio 2017\Projects\PrimeNumbers\PrimeNumbers\bin\Debug\PrimeNumbers.exe
+c:\users\iulia\documents\visual studio 2017\Projects\PrimeNumbers\PrimeNumbers\bin\Debug\PrimeNumbers.pdb
+c:\users\iulia\documents\visual studio 2017\Projects\PrimeNumbers\PrimeNumbers\bin\Debug\MPI.dll
+c:\users\iulia\documents\visual studio 2017\Projects\PrimeNumbers\PrimeNumbers\bin\Debug\MPIUtils.dll
+c:\users\iulia\documents\visual studio 2017\Projects\PrimeNumbers\PrimeNumbers\bin\Debug\MPI.xml
+c:\users\iulia\documents\visual studio 2017\Projects\PrimeNumbers\PrimeNumbers\obj\Debug\PrimeNumbers.csprojResolveAssemblyReference.cache
+c:\users\iulia\documents\visual studio 2017\Projects\PrimeNumbers\PrimeNumbers\obj\Debug\PrimeNumbers.exe
+c:\users\iulia\documents\visual studio 2017\Projects\PrimeNumbers\PrimeNumbers\obj\Debug\PrimeNumbers.pdb
