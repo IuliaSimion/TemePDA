@@ -1,0 +1,9 @@
+c:\users\iulia\documents\visual studio 2017\Projects\FindElement\FindElement\bin\Debug\FindElement.exe.config
+c:\users\iulia\documents\visual studio 2017\Projects\FindElement\FindElement\bin\Debug\FindElement.exe
+c:\users\iulia\documents\visual studio 2017\Projects\FindElement\FindElement\bin\Debug\FindElement.pdb
+c:\users\iulia\documents\visual studio 2017\Projects\FindElement\FindElement\bin\Debug\MPI.dll
+c:\users\iulia\documents\visual studio 2017\Projects\FindElement\FindElement\bin\Debug\MPIUtils.dll
+c:\users\iulia\documents\visual studio 2017\Projects\FindElement\FindElement\bin\Debug\MPI.xml
+c:\users\iulia\documents\visual studio 2017\Projects\FindElement\FindElement\obj\Debug\FindElement.csprojResolveAssemblyReference.cache
+c:\users\iulia\documents\visual studio 2017\Projects\FindElement\FindElement\obj\Debug\FindElement.exe
+c:\users\iulia\documents\visual studio 2017\Projects\FindElement\FindElement\obj\Debug\FindElement.pdb
