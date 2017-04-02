@@ -1,0 +1,6 @@
+c:\users\iulia\documents\visual studio 2015\Projects\ProducerConsumer\ProducerConsumer\bin\Debug\ProducerConsumer.exe.config
+c:\users\iulia\documents\visual studio 2015\Projects\ProducerConsumer\ProducerConsumer\obj\Debug\ProducerConsumer.csprojResolveAssemblyReference.cache
+c:\users\iulia\documents\visual studio 2015\Projects\ProducerConsumer\ProducerConsumer\bin\Debug\ProducerConsumer.exe
+c:\users\iulia\documents\visual studio 2015\Projects\ProducerConsumer\ProducerConsumer\bin\Debug\ProducerConsumer.pdb
+c:\users\iulia\documents\visual studio 2015\Projects\ProducerConsumer\ProducerConsumer\obj\Debug\ProducerConsumer.exe
+c:\users\iulia\documents\visual studio 2015\Projects\ProducerConsumer\ProducerConsumer\obj\Debug\ProducerConsumer.pdb
