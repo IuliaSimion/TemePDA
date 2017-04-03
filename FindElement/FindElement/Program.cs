@@ -17,9 +17,7 @@ namespace FindElement
                 int[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
                 int searchedElem = 12;
                 int found = 0;
-                int message = 0;
-                MPI.CompletedStatus status;
-                //MPI.Request req;
+                int aux = 0;               
 
                 var comm = Communicator.world;
                 rank = comm.Rank;
@@ -29,7 +27,7 @@ namespace FindElement
                 {
                     if (array[i] == searchedElem)
                     {
-                        Console.WriteLine(i);
+                        Console.WriteLine("Found on position:" + i);
                         found = 1;
                     }
                 }
@@ -40,10 +38,10 @@ namespace FindElement
                 {
                     for (int i = 0; i < ntasks; i++)
                     {
-                        comm.Receive(i, 1, out message, out status);
-                        if (message == 1)
+                       aux = comm.Receive<int>(i, 1);
+                        if (aux == 1)
                         {
-                            found = message;
+                            found = aux;
                         }
                     }
                     if (found != 1)
