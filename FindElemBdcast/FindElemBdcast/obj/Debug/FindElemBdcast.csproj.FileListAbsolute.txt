@@ -1,0 +1,9 @@
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemBdcast\FindElemBdcast\bin\Debug\FindElemBdcast.exe.config
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemBdcast\FindElemBdcast\bin\Debug\FindElemBdcast.exe
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemBdcast\FindElemBdcast\bin\Debug\FindElemBdcast.pdb
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemBdcast\FindElemBdcast\bin\Debug\MPI.dll
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemBdcast\FindElemBdcast\bin\Debug\MPIUtils.dll
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemBdcast\FindElemBdcast\bin\Debug\MPI.xml
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemBdcast\FindElemBdcast\obj\Debug\FindElemBdcast.csprojResolveAssemblyReference.cache
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemBdcast\FindElemBdcast\obj\Debug\FindElemBdcast.exe
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemBdcast\FindElemBdcast\obj\Debug\FindElemBdcast.pdb
