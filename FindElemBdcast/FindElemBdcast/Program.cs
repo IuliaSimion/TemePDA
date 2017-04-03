@@ -14,9 +14,10 @@ namespace FindElemBdcast
             using (new MPI.Environment(ref args))
             {
                 int ntasks, rank;
-                int[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
-                int searchedElem = 50;
+                int[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 12 };
+                int searchedElem = 12;
                 int found = -1;
+                int max = -1;
                 
                 
 
@@ -30,18 +31,21 @@ namespace FindElemBdcast
                     if (array[i] == searchedElem)
                     {
                         found = i;
+                        if (found > max)
+                            max = found;
                     }
                 }
 
-                comm.Gather(found, 0);
+                //comm.Gather(found, 0);
+                comm.Reduce<int>(max, Operation<int>.Max, 0);
 
                 if (rank == 0)
                 {
                     
-                    if (found < 0)
+                    if (max < 0)
                         Console.WriteLine("Not found!");
                     else
-                        Console.WriteLine("Last position: " + found);
+                        Console.WriteLine("Last position: " + max);
                 }
 
                 Console.ReadLine();
