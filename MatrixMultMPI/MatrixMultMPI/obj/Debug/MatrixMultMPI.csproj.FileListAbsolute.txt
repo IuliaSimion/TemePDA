@@ -1,0 +1,9 @@
+c:\users\iulia\documents\visual studio 2017\Projects\MatrixMultMPI\MatrixMultMPI\bin\Debug\MatrixMultMPI.exe.config
+c:\users\iulia\documents\visual studio 2017\Projects\MatrixMultMPI\MatrixMultMPI\bin\Debug\MatrixMultMPI.exe
+c:\users\iulia\documents\visual studio 2017\Projects\MatrixMultMPI\MatrixMultMPI\bin\Debug\MatrixMultMPI.pdb
+c:\users\iulia\documents\visual studio 2017\Projects\MatrixMultMPI\MatrixMultMPI\bin\Debug\MPI.dll
+c:\users\iulia\documents\visual studio 2017\Projects\MatrixMultMPI\MatrixMultMPI\bin\Debug\MPIUtils.dll
+c:\users\iulia\documents\visual studio 2017\Projects\MatrixMultMPI\MatrixMultMPI\bin\Debug\MPI.xml
+c:\users\iulia\documents\visual studio 2017\Projects\MatrixMultMPI\MatrixMultMPI\obj\Debug\MatrixMultMPI.csprojResolveAssemblyReference.cache
+c:\users\iulia\documents\visual studio 2017\Projects\MatrixMultMPI\MatrixMultMPI\obj\Debug\MatrixMultMPI.exe
+c:\users\iulia\documents\visual studio 2017\Projects\MatrixMultMPI\MatrixMultMPI\obj\Debug\MatrixMultMPI.pdb
