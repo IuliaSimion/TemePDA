@@ -1,0 +1,9 @@
+c:\users\iulia\documents\visual studio 2017\Projects\RoyFloyd\RoyFloyd\bin\Debug\RoyFloyd.exe.config
+c:\users\iulia\documents\visual studio 2017\Projects\RoyFloyd\RoyFloyd\bin\Debug\RoyFloyd.exe
+c:\users\iulia\documents\visual studio 2017\Projects\RoyFloyd\RoyFloyd\bin\Debug\RoyFloyd.pdb
+c:\users\iulia\documents\visual studio 2017\Projects\RoyFloyd\RoyFloyd\obj\Debug\RoyFloyd.csprojResolveAssemblyReference.cache
+c:\users\iulia\documents\visual studio 2017\Projects\RoyFloyd\RoyFloyd\obj\Debug\RoyFloyd.exe
+c:\users\iulia\documents\visual studio 2017\Projects\RoyFloyd\RoyFloyd\obj\Debug\RoyFloyd.pdb
+c:\users\iulia\documents\visual studio 2017\Projects\RoyFloyd\RoyFloyd\bin\Debug\MPI.dll
+c:\users\iulia\documents\visual studio 2017\Projects\RoyFloyd\RoyFloyd\bin\Debug\MPIUtils.dll
+c:\users\iulia\documents\visual studio 2017\Projects\RoyFloyd\RoyFloyd\bin\Debug\MPI.xml
