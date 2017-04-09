@@ -1,0 +1,9 @@
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemScatter\FindElemScatter\bin\Debug\FindElemScatter.exe.config
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemScatter\FindElemScatter\bin\Debug\FindElemScatter.exe
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemScatter\FindElemScatter\bin\Debug\FindElemScatter.pdb
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemScatter\FindElemScatter\bin\Debug\MPI.dll
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemScatter\FindElemScatter\bin\Debug\MPIUtils.dll
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemScatter\FindElemScatter\bin\Debug\MPI.xml
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemScatter\FindElemScatter\obj\Debug\FindElemScatter.csprojResolveAssemblyReference.cache
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemScatter\FindElemScatter\obj\Debug\FindElemScatter.exe
+c:\users\iulia\documents\visual studio 2017\Projects\FindElemScatter\FindElemScatter\obj\Debug\FindElemScatter.pdb
