@@ -1,0 +1,106 @@
+#include "cuda_runtime.h"
+#include <stdio.h>
+#include <cstdlib>
+#include <ctime>
+#include "device_launch_parameters.h"
+
+#define NO_ELEMENTS 8
+
+__global__ void add(int *array_1, int *array_2, int *result)
+{
+	auto temp = 0;
+
+	for(auto i = 0; i< NO_ELEMENTS; ++i)
+	{
+		 temp += array_1[threadIdx.x * NO_ELEMENTS + i] * array_2[i * NO_ELEMENTS + threadIdx.y];
+	}
+
+	result[threadIdx.x * NO_ELEMENTS + threadIdx.y] = temp;
+}
+
+void random_ints(int *array);
+void print_array(int *array);
+
+int main()
+{
+	int *array_1;
+	int *array_2;
+	int *result; // host copies of a,b,c
+	int *dev_array_1, *dev_array_2, *dev_result; // device copies of a,b,c
+	
+	int size = NO_ELEMENTS * NO_ELEMENTS * sizeof(int);
+
+	// allocate space for device copies fo a,b,c
+	cudaMalloc((void **)&dev_array_1, size);
+	cudaMalloc((void **)&dev_array_2, size);
+	cudaMalloc((void **)&dev_result, size);
+
+	// set up variables
+	array_1 = new int[size];
+	array_2 = new int[size];
+	result = new int[size];
+
+	srand(time(nullptr));
+
+	random_ints(array_1);
+	random_ints(array_2);
+	random_ints(result);
+
+	printf("\Array 1:\n");
+	print_array(array_1);
+
+	printf("\Array 2:\n");
+	print_array(array_2);
+
+	// copy inputs to device
+	cudaMemcpy(dev_array_1, array_1, size, cudaMemcpyHostToDevice);
+	cudaMemcpy(dev_array_2, array_2, size, cudaMemcpyHostToDevice);
+	cudaMemcpy(dev_result, result, size, cudaMemcpyHostToDevice);
+
+	int numOfBlocks = 1;
+	dim3 threadsPerBlock(NO_ELEMENTS, NO_ELEMENTS);
+
+	add<<<numOfBlocks, threadsPerBlock>>> (dev_array_1, dev_array_2, dev_result);
+
+	cudaMemcpy(result, dev_result, size, cudaMemcpyDeviceToHost);
+
+	printf("\nResult:\n");
+	print_array(result);
+		
+	// free device memory
+	cudaFree(dev_array_1);
+	cudaFree(dev_array_2);
+	cudaFree(dev_result);
+	
+	// free host memory
+	free(array_1);
+	free(array_2);
+	free(result);
+
+	return 0;
+}
+
+void random_ints(int *array)
+{
+
+	for(auto i = 0; i < NO_ELEMENTS; ++i)
+	{
+		for(auto j = 0; j < NO_ELEMENTS; ++j)
+		{
+			array[i * NO_ELEMENTS + j] = rand() % 10;
+		}
+	}
+}
+
+void print_array(int *array)
+{
+	for(auto i = 0; i < NO_ELEMENTS; ++i)
+	{
+		for(auto j = 0; j < NO_ELEMENTS; ++j)
+		{
+			printf("%d ", array[i * NO_ELEMENTS + j]);
+		}
+
+		printf("\n");
+	}
+}
