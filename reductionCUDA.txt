@@ -1,0 +1,279 @@
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
+#include <device_functions.h>
+#include <stdio.h>
+#include <cstdlib>
+#include <ctime>
+
+#define NO_ELEMENTS 16
+
+__global__ void reduce_sum(int *g_data, int *g_odata)
+{
+	extern __shared__ int sdata[];
+
+	unsigned int tid = threadIdx.x;
+	unsigned int i = blockIdx.x *blockDim.x + threadIdx.x;
+	sdata[tid] = g_data[i];
+	__syncthreads();
+	// do reduction in shared mem
+	for (unsigned int s = 1; s < blockDim.x; s *= 2) 
+	{
+		if (tid % (2 * s) == 0) 
+		{
+			sdata[tid] += sdata[tid + s];
+		}
+		__syncthreads();
+	}
+	// write result for this block to global mem
+	if (tid == 0)
+	{
+		g_odata[blockIdx.x] = sdata[0];
+	}
+}
+
+__global__ void reduce_diff(int *g_data, int *g_odata)
+{
+	extern __shared__ int sdata[];
+
+	unsigned int tid = threadIdx.x;
+	unsigned int i = blockIdx.x *blockDim.x + threadIdx.x;
+	sdata[tid] = g_data[i];
+	__syncthreads();
+	// do reduction in shared mem
+	for (unsigned int s = 1; s < blockDim.x; s *= 2) 
+	{
+		if (tid % (2 * s) == 0) 
+		{
+			sdata[tid] -= sdata[tid + s];
+		}
+		__syncthreads();
+	}
+	// write result for this block to global mem
+	if (tid == 0)
+	{
+		g_odata[blockIdx.x] = sdata[0];
+	}
+}
+
+__global__ void reduce_multi(int *g_data, int *g_odata)
+{
+	extern __shared__ int sdata[];
+
+	unsigned int tid = threadIdx.x;
+	unsigned int i = blockIdx.x *blockDim.x + threadIdx.x;
+	sdata[tid] = g_data[i];
+	__syncthreads();
+	// do reduction in shared mem
+	for (unsigned int s = 1; s < blockDim.x; s *= 2)
+	{
+		if (tid % (2 * s) == 0)
+		{
+			sdata[tid] *= sdata[tid + s];
+		}
+		__syncthreads();
+	}
+	// write result for this block to global mem
+	if (tid == 0)
+	{
+		g_odata[blockIdx.x] = sdata[0];
+	}
+}
+
+// no sense??
+__global__ void reduce_div(int *g_data, int *g_odata)
+{
+	extern __shared__ int sdata[];
+
+	unsigned int tid = threadIdx.x;
+	unsigned int i = blockIdx.x *blockDim.x + threadIdx.x;
+	sdata[tid] = g_data[i];
+	__syncthreads();
+	// do reduction in shared mem
+	for (unsigned int s = 1; s < blockDim.x; s *= 2)
+	{
+		if (tid % (2 * s) == 0)
+		{
+			sdata[tid] /= sdata[tid + s];
+		}
+		__syncthreads();
+	}
+	// write result for this block to global mem
+	if (tid == 0)
+	{
+		g_odata[blockIdx.x] = sdata[0];
+	}
+}
+
+__global__ void reduce_max(int *g_data, int *g_odata)
+{
+	extern __shared__ int sdata[];
+
+	unsigned int tid = threadIdx.x;
+	unsigned int i = blockIdx.x *blockDim.x + threadIdx.x;
+	sdata[tid] = g_data[i];
+	__syncthreads();
+	// do reduction in shared mem
+	for (unsigned int s = 1; s < blockDim.x; s *= 2)
+	{
+		if (tid % (2 * s) == 0)
+		{
+			if(sdata[tid] < sdata[tid + s])
+			{
+				sdata[tid] = sdata[tid + s];
+			}
+		}
+		__syncthreads();
+	}
+	// write result for this block to global mem
+	if (tid == 0)
+	{
+		g_odata[blockIdx.x] = sdata[0];
+	}
+}
+
+__global__ void reduce_min(int *g_data, int *g_odata)
+{
+	extern __shared__ int sdata[];
+
+	unsigned int tid = threadIdx.x;
+	unsigned int i = blockIdx.x *blockDim.x + threadIdx.x;
+	sdata[tid] = g_data[i];
+	__syncthreads();
+	// do reduction in shared mem
+	for (unsigned int s = 1; s < blockDim.x; s *= 2)
+	{
+		if (tid % (2 * s) == 0)
+		{
+			if(sdata[tid] > sdata[tid + s])
+			{
+				sdata[tid] = sdata[tid + s];
+			}
+		}
+		__syncthreads();
+	}
+	// write result for this block to global mem
+	if (tid == 0)
+	{
+		g_odata[0] = sdata[0];
+	}
+}
+
+void random_ints(int *array);
+void print_array(int *array);
+
+int main()
+{
+	int *data;
+	int *sum_data;
+	int *diff_data;
+	int *multi_data;
+	int *div_data;
+	int *max_data;
+	int *min_data;
+
+	int *dev_data;
+	int *dev_sum_data;
+	int *dev_diff_data;
+	int *dev_div_data;
+	int *dev_multi_data;
+	int *dev_max_data;
+	int *dev_min_data;
+	int size = NO_ELEMENTS * sizeof(int);
+
+	// allocate space for device copies fo a,b,c
+	cudaMalloc((void **)&dev_data, size);
+	cudaMalloc((void **)&dev_sum_data, size);
+	cudaMalloc((void **)&dev_diff_data, size);
+	cudaMalloc((void **)&dev_div_data, size);
+	cudaMalloc((void **)&dev_multi_data, size);
+	cudaMalloc((void **)&dev_max_data, size);
+	cudaMalloc((void **)&dev_min_data, size);
+
+	// set up variables
+	data = new int[size];
+	sum_data = new int[size];
+	diff_data = new int[size];
+	multi_data = new int[size];
+	div_data = new int[size];
+	min_data = new int[size];
+	max_data = new int[size];
+
+	srand(time(nullptr));
+
+	random_ints(data);
+	sum_data = data;
+	diff_data = data;
+	multi_data = data;
+	div_data = data;
+	min_data = data;
+	max_data = data;
+
+	printf("\nInput:\n");
+	print_array(data);
+
+	// copy inputs to device
+	cudaMemcpy(dev_data, data, size, cudaMemcpyHostToDevice);
+	cudaMemcpy(dev_sum_data, sum_data, size, cudaMemcpyHostToDevice);
+	cudaMemcpy(dev_diff_data, diff_data, size, cudaMemcpyHostToDevice);
+	cudaMemcpy(dev_multi_data, multi_data, size, cudaMemcpyHostToDevice);
+	cudaMemcpy(dev_div_data, div_data, size, cudaMemcpyHostToDevice);
+	cudaMemcpy(dev_max_data, max_data, size, cudaMemcpyHostToDevice);
+	cudaMemcpy(dev_min_data, min_data, size, cudaMemcpyHostToDevice);
+
+	int numOfBlocks = 1;
+	dim3 threadsPerBlock(NO_ELEMENTS);
+
+	reduce_sum <<< numOfBlocks, threadsPerBlock >>> (dev_data, dev_sum_data);
+	reduce_diff <<< numOfBlocks, threadsPerBlock >>> (dev_data, dev_diff_data);
+	reduce_multi <<< numOfBlocks, threadsPerBlock >>> (dev_data, dev_multi_data);
+	reduce_div <<< numOfBlocks, threadsPerBlock >>> (dev_data, dev_div_data);
+	reduce_max <<< numOfBlocks, threadsPerBlock >>> (dev_data, dev_max_data);
+	reduce_min <<< numOfBlocks, threadsPerBlock >>> (dev_data, dev_min_data);
+
+	cudaMemcpy(data, dev_data, size, cudaMemcpyDeviceToHost);
+	cudaMemcpy(sum_data, dev_sum_data, size, cudaMemcpyDeviceToHost);
+	cudaMemcpy(diff_data, dev_diff_data, size, cudaMemcpyDeviceToHost);
+	cudaMemcpy(multi_data, dev_multi_data, size, cudaMemcpyDeviceToHost);
+	cudaMemcpy(div_data, dev_div_data, size, cudaMemcpyDeviceToHost);
+	cudaMemcpy(max_data, dev_max_data, size, cudaMemcpyDeviceToHost);
+	cudaMemcpy(min_data, dev_min_data, size, cudaMemcpyDeviceToHost);
+
+	printf("\nSum: \n");
+	print_array(sum_data);
+	printf("\nDiv: \n");
+	print_array(diff_data);
+	printf("\nMulti: \n");
+	print_array(multi_data);
+	printf("\nDiv: \n");
+	print_array(div_data);
+	printf("\nMax: \n");
+	print_array(max_data);
+	printf("\nMin: \n");
+	print_array(min_data);
+
+	// free device memory
+	cudaFree(dev_data);
+	cudaFree(dev_sum_data);
+
+	// free host memory
+	free(data);
+	free(sum_data);
+
+	return 0;
+}
+
+void random_ints(int *array)
+{
+	for (auto i = 0; i < NO_ELEMENTS; ++i)
+	{
+		array[i] = rand() % 10;
+	}
+}
+
+void print_array(int *array)
+{
+	for (auto i = 0; i < NO_ELEMENTS; ++i)
+	{
+		printf("%d ", array[i]);
+	}
+}
